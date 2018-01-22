@@ -4,40 +4,73 @@
   <!-- link to the ToDo MVC index.css file -->
   <link rel="stylesheet" href="/static/todomvc-app-css/index.css">
   <title>Realtime ToDo List</title>
-</head>
-
-<body>
-  <section class="todoapp">
-    <header class="header">
-      <h1>Todos</h1>
-      <input class="new-todo" placeholder="What needs to be done?" 
-      autofocus="" onkeypress="addItem(event)">
-    </header>
-    
-    <section class="main">
-      <ul class="todo-list"></ul>
-    </section>
-    
-    <footer class="footer"></footer>  
-  </section>
 
   <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-  <script>
+  <script src ="/static/app.js"></script>
+
+
+</head>
+
+
+<body>
+
+  Items
+  <ul id="messages">
+    <li>Item 1</li>
+    <li>🚀</li>
+  </ul>
+
+  <p/>
+
+  <input type="text" enabled="true"/>
+  <input type="button" onclick="sendMessage()"/>
+  
+  <p/>
+
+  Users
+
+  <ul id="users">
+    <li>Zan</li>
+    <li>Bla</li>
+  </ul>
+
+
+
+    
+
+</body>
+
+</html>
+
+
+  <!-- <script>
     // Enable pusher logging for debugging - don't include this in production
     Pusher.logToConsole = true;
 
     // configure pusher
-    const pusher = new Pusher('YOUR_APP_KEY', {
+    const pusher = new Pusher('8d33551ec680cbe8f4e2', {
       cluster: 'eu',
       encrypted: true
     });
 
+    function sendMessage(){
+      console.log("Bla");
+    }
+
     // subscribe to `todo` public channel, on which we'd be broadcasting events
     const channel = pusher.subscribe('todo');
+    const presenceChannel = pusher.subscribe('presence-todo')
+    const privateChannel = pusher.subscribe('private-todo')
 
     // listen for item-added events, and update todo list once event triggered
     channel.bind('item-added', data => {
       appendToList(data);
+    });
+
+    presenceChannel.bind('pusher:subscription_succeeded', function() {
+      var me = presenceChannel.members.me;
+      var userId = me.id;
+      var userInfo = me.info;
     });
 
     // listen for item-removed events
@@ -106,6 +139,4 @@
       let list = document.querySelector(".todo-list")
       list.innerHTML += html;
     };
-  </script>
-</body>
-</html>
+  </script> -->
