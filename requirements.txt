@@ -20,3 +20,6 @@ requests==2.18.4
 six==1.10.0
 urllib3==1.22
 Werkzeug==0.12.2
+flask-login==0.4.1
+flask-wtf==0.14.2
+wtforms==2.1
