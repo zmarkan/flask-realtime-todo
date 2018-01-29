@@ -2,7 +2,7 @@
 # ./app.py
 
 from flask import Flask, flash, render_template, request, jsonify, redirect
-from flask_login import UserMixin, LoginManager, login_required, login_user
+from flask_login import UserMixin, LoginManager, login_required, login_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, InputRequired
@@ -48,6 +48,7 @@ pusher = Pusher(
   cluster='eu',
   ssl=True
 )
+
 
 class LoginForm(FlaskForm):
   name = StringField('name', validators=[InputRequired()])
@@ -123,13 +124,18 @@ def makeRequestToRequestBin():
 @app.route("/pusher/auth", methods=['POST'])
 def pusher_authentication():
 
+  me = current_user
+  print("current user:")
+  print(me.name)
+
+
   auth = pusher.authenticate(
     channel = request.form['channel_name'],
     socket_id = request.form['socket_id'],
     custom_data = {
-      u'user_id': u'1',
+      u'user_id': me.name,
       u'user_info': {
-        u'twitter': u'@pusher'
+        u'name': me.name
       }
     }
   )

@@ -26,7 +26,7 @@ const pusher = new Pusher('8d33551ec680cbe8f4e2', {
   cluster: 'eu',
   encrypted: true,
   auth: {
-    username = 'zantheman'
+    username: ''
   }
 });
 
