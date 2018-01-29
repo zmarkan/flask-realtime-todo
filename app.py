@@ -6,9 +6,6 @@ from flask_login import UserMixin, LoginManager, login_required, login_user, cur
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, InputRequired
-
-
-
 from pusher import Pusher
 import json
 import requests, time
@@ -89,37 +86,6 @@ def load_user(user_id):
 @login_required
 def index():
   return render_template('index.html')
-
-# endpoint for storing todo item
-@app.route('/add-todo', methods = ['POST'])
-def addTodo():
-  data = json.loads(request.data) # load JSON data from request
-  pusher.trigger('todo', 'item-added', data) # trigger `item-added` event on `todo` channel
-  return jsonify(data)
-
-# endpoint for deleting todo item
-@app.route('/remove-todo/<item_id>')
-def removeTodo(item_id):
-  data = {'id': item_id }
-  pusher.trigger('todo', 'item-removed', data)
-  return jsonify(data)
-
-# endpoint for updating todo item
-@app.route('/update-todo/<item_id>', methods = ['POST'])
-def updateTodo(item_id):
-  data = {
-    'id': item_id,
-    'completed': json.loads(request.data).get('completed', 0)
-  }
-  pusher.trigger('todo', 'item-updated', data)
-  return jsonify(data)
-
-@app.route('/make-req', methods = ['GET'])
-def makeRequestToRequestBin():
-  r = requests.post('https://requestb.in/16criga1', data={"ts":time.time()})
-  print r.status_code
-  print r.content
-  return jsonify({'success': True})
 
 @app.route("/pusher/auth", methods=['POST'])
 def pusher_authentication():
