@@ -1,5 +1,8 @@
-# 📝 Flask Realtime ToDo
-Realtime CRUD Python application built with Flask, Vanilla JavaScript and Pusher.
+# 📝 This USED to be an app like Flask Realtime ToDo...
+
+Then it got an arrow in the knee...
+Not it just showcases different channels of Pusher, like Private and Presence, and authorises them.
+No jQuery (although I should have used it)
 
 To run locally:
 - Clone/Download this repo - `git clone git@github.com:olayinkaos/flask-realtime-todo.git`
