@@ -141,14 +141,4 @@ def pusher_authentication():
   )
   return json.dumps(auth)
 
-# @app.route("/pusher/auth", methods=['POST'])
-# def pusher_authentication():
-
-#   auth = pusher.authenticate(
-#     channel=request.form['channel_name'],
-#     socket_id=request.form['socket_id']
-#   )
-#   return json.dumps(auth)
-
-# run Flask app in debug mode
 app.run(debug=True)
